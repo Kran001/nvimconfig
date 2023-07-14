@@ -5,11 +5,20 @@ local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
-
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-    -- набор Lua функций, используется как зависимость в большинстве
+  use {
+  	'nvim-tree/nvim-tree.lua',
+	requires = {
+	  'nvim-tree/nvim-web-devicons',
+	}
+  }
+  
+  --themes
+  use 'olimorris/onedarkpro.nvim'
+
+  -- набор Lua функций, используется как зависимость в большинстве
   -- плагинов, где есть работа с асинхронщиной
   use 'nvim-lua/plenary.nvim'
 
@@ -46,7 +55,14 @@ return require('packer').startup(function(use)
 
   use 'nvim-telescope/telescope-file-browser.nvim'
 
+  -- иконки в выпадающем списке автодополнений (прямо как в vscode)
+  use('onsails/lspkind-nvim')
+
+  use 'fatih/vim-go'
+
+
   if packer_bootstrap then
     require('packer').sync()
   end
 end)
+
