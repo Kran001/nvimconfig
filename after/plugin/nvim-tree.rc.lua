@@ -29,7 +29,7 @@ tree.setup({
   renderer = { 
     group_empty = true,
   },
-  filter = {
+  filters = {
     dotfiles = true, 
   }
 })
