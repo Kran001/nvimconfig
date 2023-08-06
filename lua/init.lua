@@ -9,8 +9,5 @@ vim.opt.smarttab = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.expandtab=true
-
-vim.cmd("colorscheme onedark")
-
-
+vim.opt.wrap = false
 

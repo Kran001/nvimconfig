@@ -1,5 +1,6 @@
 local status, treesitter = pcall(require, 'nvim-treesitter.configs')
 if (not status) then return end
+
 -- ~/.config/nvim/lua/plugins/treesitter.lua
 treesitter.setup{
   -- список парсеров, список доступных парсеров можно посмотреть в документации

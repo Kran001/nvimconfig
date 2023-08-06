@@ -6,7 +6,7 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 keymap.set('n', 'te', ':tabedit<Return>', { silent = true})
 -- split
 keymap.set('n', 'ss', ':split<Return><C-w>w', { silent = true })
-keymap.set('n', 'sv', ':vsplit<Return><C-w>w', {silent = true})
+keymap.set('n', 'sv', ':vsplit<Return><C-w>w', { silent = true })
 
 
 -- resize window

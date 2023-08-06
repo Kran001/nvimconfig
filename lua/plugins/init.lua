@@ -6,16 +6,16 @@ if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-return require('packer').startup(function(use)
+local packer = require('packer')
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
   	'nvim-tree/nvim-tree.lua',
 	requires = {
 	  'nvim-tree/nvim-web-devicons',
-	}
+	} 
   }
-  
   --themes
   use 'olimorris/onedarkpro.nvim'
 
@@ -41,37 +41,43 @@ return require('packer').startup(function(use)
   -- набор готовых сниппетов для всех языков, включая go
   use 'rafamadriz/friendly-snippets'
 
-  -- парсер для всех языков программирования, цветной код как в твоем
-  -- любимом IDE
+  --go lib usage
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' 
   -- конфиги для LSP серверов, нужен для простой настройки и
   -- возможности добавления новых серверов
   use 'neovim/nvim-lspconfig'
+  -- парсер для всех языков программирования, цветной код как в твоем
+  -- любимом IDE
   use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      config = function()
-        -- так подгружается конфигурация конкретного плагина
-        -- ~/.config/nvim/lua/plugins/treesitter.lua
-        require('plugins.treesitter') 
-      end
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
   }
-  
+
   use {
     'nvim-telescope/telescope.nvim',
-    config = function()
-      require('plugins.telescope')
-    end
   }
 
   use 'nvim-telescope/telescope-file-browser.nvim'
+  use {
+    'akinsho/bufferline.nvim', 
+    tag = "*", 
+    requires = 'nvim-tree/nvim-web-devicons',
+  }
 
   -- иконки в выпадающем списке автодополнений (прямо как в vscode)
   use('onsails/lspkind-nvim')
 
+  use({
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    requires = {
+        "nvim-lua/plenary.nvim",
+    },
+  })
+
   if packer_bootstrap then
-    require('packer').sync()
+    packer.sync()
   end
 end)
 
