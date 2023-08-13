@@ -5,6 +5,7 @@ local actions = require('telescope.actions')
 
 telescope.setup {
   defaults = {
+    hidden = true,
     mappings = {
       n = {
         ['q'] = actions.close
@@ -13,6 +14,9 @@ telescope.setup {
   },
 
   pickers = {
+    find_files = {
+      hidden = true,
+    },
     buffers = {
       -- начинать в normal моде при открытии списка буферов
       initial_mode = 'normal'
