@@ -76,7 +76,7 @@ vim.cmd [[
   highlight! default link CmpItemKind CmpItemMenuDefault
 ]]
 
-local map = vim.keymap.set 
+local map = vim.keymap.set
 local opts = { noremap=true, silent=true }
 
 -- удалить ошибки диагностики в левом столбце (SignColumn)
@@ -110,7 +110,6 @@ map('n', 'gr', vim.lsp.buf.references, {})
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-install
 lspconfig.gopls.setup({
   capabilities = capabilities,
-  on_attach = on_attach,
   cmd = { 'gopls', 'serve' },
   filetypes = { 'go', 'go.mod' },
   root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
@@ -132,9 +131,6 @@ if (not goStatus) then return end
 local goFmt = require('go.format')
 
 go.setup({
-  --lsp_cfg = {
-  --  capabilities = capabilities,
-  --},
   lsp_keymaps = false,
   go='go', -- go command, can be go[default] or go1.18beta1
   goimport='gopls', -- goimport command, can be gopls[default] or goimport
@@ -144,6 +140,8 @@ go.setup({
   tag_transform = false, -- can be transform option("snakecase", "camelcase", etc) check gomodifytags for details and more options
   tag_options = 'json=omitempty',
 })
+
+map('n', '<leader>8', "<cmd>GoPkgOutline<CR>", {})
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -189,7 +187,7 @@ lspconfig.jsonnet_ls.setup {
       StringStyle         = 'single',
       CommentStyle        = 'slash',
       PrettyFieldNames    = true,
-      PadArrays           = false,
+      PadArrays           = true,
       PadObjects          = true,
       SortImports         = true,
       UseImplicitPlus     = true,

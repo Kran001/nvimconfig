@@ -43,7 +43,11 @@ return packer.startup(function(use)
 
   --go lib usage
   use 'ray-x/go.nvim'
-  use 'ray-x/guihua.lua' 
+  use 'ray-x/guihua.lua'
+  use {
+    'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'}
+  }
+
   -- конфиги для LSP серверов, нужен для простой настройки и
   -- возможности добавления новых серверов
   use 'neovim/nvim-lspconfig'
