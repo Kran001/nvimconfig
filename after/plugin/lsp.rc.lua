@@ -5,7 +5,6 @@ local util = require('lspconfig/util')
 
 local cmpStatus, cmp = pcall(require, 'cmp')
 if (not cmpStatus) then return end
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
   'force',
@@ -200,3 +199,36 @@ lspconfig.jsonnet_ls.setup {
     },
   },
 }
+
+lspconfig.pyright.setup{}
+
+--lspconfig.pyls.setup {
+--  cmd = {"pyls"},
+--  filetypes = {"python"},
+--  settings = {
+--    pyls = {
+--      configurationSources = {"flake8"},
+--      plugins = {
+--        jedi_completion = {enabled = true},
+--        jedi_hover = {enabled = true},
+--        jedi_references = {enabled = true},
+--        jedi_signature_help = {enabled = true},
+--        jedi_symbols = {enabled = true, all_scopes = true},
+--        pycodestyle = {enabled = false},
+--        flake8 = {
+--          enabled = true,
+--          ignore = {},
+--          maxLineLength = 160
+--        },
+--        mypy = {enabled = false},
+--        isort = {enabled = false},
+--        yapf = {enabled = false},
+--        pylint = {enabled = false},
+--        pydocstyle = {enabled = false},
+--        mccabe = {enabled = false},
+--        preload = {enabled = false},
+--        rope_completion = {enabled = false}
+--      }
+--    }
+--  },
+-- 
