@@ -42,11 +42,13 @@ return packer.startup(function(use)
   use 'rafamadriz/friendly-snippets'
 
   --go lib usage
-  use 'ray-x/go.nvim'
-  use 'ray-x/guihua.lua'
-  use {
-    'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'}
-  }
+  use('ray-x/go.nvim')
+  use('ray-x/guihua.lua')
+  use("mfussenegger/nvim-dap")
+  use("leoluz/nvim-dap-go")
+  use("rcarriga/nvim-dap-ui")
+  use("nvim-neotest/neotest")
+  use("nvim-neotest/neotest-go")
 
   -- конфиги для LSP серверов, нужен для простой настройки и
   -- возможности добавления новых серверов
@@ -84,6 +86,7 @@ return packer.startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
+  use('rcarriga/nvim-notify')
   if packer_bootstrap then
     packer.sync()
   end

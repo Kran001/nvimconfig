@@ -5,6 +5,7 @@ local util = require('lspconfig/util')
 
 local cmpStatus, cmp = pcall(require, 'cmp')
 if (not cmpStatus) then return end
+
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
   'force',
@@ -12,18 +13,10 @@ lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
   capabilities
 )
 
-local cmp = require('cmp')
 local lspkind = require('lspkind')
 
-local source_mapping = {
-  buffer = '[Buffer]',
-  nvim_lsp = '[LSP]',
-  nvim_lua = '[Lua]',
-  cmp_tabnine = '[TN]',
-  path = '[Path]',
-}
-
 local select_opts = {behavior = cmp.SelectBehavior.Insert}
+
 local luasnip = require('luasnip')
 cmp.setup({
   snippet = {
@@ -106,7 +99,6 @@ map('n', 'gr', vim.lsp.buf.references, {})
 --map('n', '<leader>f', vim.lsp.buf.formatting, {})
 
 -- Languages settings 
- 
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-install
 lspconfig.gopls.setup({
   capabilities = capabilities,
@@ -141,7 +133,7 @@ go.setup({
   tag_options = 'json=omitempty',
 })
 
-map('n', '<leader>8', "<cmd>GoPkgOutline<CR>", {})
+map('n', '<Space>8', "<cmd>GoPkgOutline<CR>", {})
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -200,33 +192,3 @@ lspconfig.jsonnet_ls.setup {
 
 lspconfig.pyright.setup{}
 
---lspconfig.pyls.setup {
---  cmd = {"pyls"},
---  filetypes = {"python"},
---  settings = {
---    pyls = {
---      configurationSources = {"flake8"},
---      plugins = {
---        jedi_completion = {enabled = true},
---        jedi_hover = {enabled = true},
---        jedi_references = {enabled = true},
---        jedi_signature_help = {enabled = true},
---        jedi_symbols = {enabled = true, all_scopes = true},
---        pycodestyle = {enabled = false},
---        flake8 = {
---          enabled = true,
---          ignore = {},
---          maxLineLength = 160
---        },
---        mypy = {enabled = false},
---        isort = {enabled = false},
---        yapf = {enabled = false},
---        pylint = {enabled = false},
---        pydocstyle = {enabled = false},
---        mccabe = {enabled = false},
---        preload = {enabled = false},
---        rope_completion = {enabled = false}
---      }
---    }
---  },
--- 
