@@ -53,8 +53,12 @@ for k, v in pairs(options) do
 end
 
 vim.cmd([[
-	set termguicolors
 	lan en_US.UTF-8
+	set termguicolors
+	hi DiagnosticError guifg=Red
+	hi DiagnosticWarn  guifg=DarkOrange
+	hi DiagnosticInfo  guifg=Blue
+	hi DiagnosticHint  guifg=Green
 ]])
 
 -- switch to absolute line numbers in insert mode

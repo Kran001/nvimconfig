@@ -47,6 +47,7 @@ cmp.setup({
       end
     end, {'i', 's'}),
     ['<C-y>'] = cmp.mapping.confirm({ select = false }),
+    ['<C-Space>'] = cmp.mapping.confirm({ select = false }),
 --    ['<C-y>'] = cmp.mapping.complete(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
@@ -63,6 +64,12 @@ cmp.setup({
     { name = 'luasnip' },
   })
 })
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
+end
 
 vim.cmd [[
   set completeopt=menuone,noinsert,noselect

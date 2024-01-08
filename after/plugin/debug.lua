@@ -3,9 +3,49 @@ local dapui = require("dapui")
 local gdap = require("dap-go")
 --- local vtdap = require("nvim-dap-virtual-text")
 
-gdap.setup({})
+gdap.setup()
 dapui.setup({})
 -- vtdap.setup({})
+
+-- dap.adapters.go = {
+--   type = 'executable';
+--   command = 'node';
+--   args = { "--no-deprecation", os.getenv('HOME') .. '/tmp/vscode-go/dist/debugAdapter.js'};
+-- }
+
+dap.adapters.delve = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = 'dlv',
+    args = {'dap', '-l', '127.0.0.1:${port}'},
+  }
+}
+
+
+local scratchCfg = {
+  type = "delve",
+  name = "Scratch no args",
+  request = "launch",
+--  program = "${file}",
+  program = "./${relativeFileDirname}",
+  showLog = true,
+  dlvToolPath = vim.fn.exepath('dlv'),  -- Adjust to where delve is installed
+  args = {"--local-config-enabled", "--bind-localhost"},
+}
+
+local standardDebug = {
+  type = 'delve',
+  name = 'Debug';
+  request = 'launch';
+  showLog = true;
+  program = "${file}";
+  dlvToolPath = vim.fn.exepath('dlv'),  -- Adjust to where delve is installed
+  args = {"--local-config-enabled", "--bind-localhost"},
+}
+
+table.insert(dap.configurations.go, scratchCfg)
+table.insert(dap.configurations.go, standardDebug)
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()

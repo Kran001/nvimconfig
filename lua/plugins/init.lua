@@ -59,6 +59,7 @@ return packer.startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
   }
+  use("Mofiqul/vscode.nvim")
 
   use {
     'nvim-telescope/telescope.nvim',
@@ -81,6 +82,9 @@ return packer.startup(function(use)
         "nvim-lua/plenary.nvim",
     },
   })
+
+  use({"windwp/nvim-autopairs"})
+
 
   use {
     'nvim-lualine/lualine.nvim',

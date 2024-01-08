@@ -4,8 +4,9 @@ if (not status) then return end
 bl.setup{
   options = {
     mode = "tabs",
-    always_show_bufferline = false,
-    show_buffer_close_icons = false,
+	diagnostics = "nvim_lsp",
+    always_show_bufferline = true,
+    show_buffer_close_icons = tre,
     show_close_icon = false,
     color_icons = true,
   },

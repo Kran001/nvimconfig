@@ -144,6 +144,11 @@ _G.packer_plugins = {
     path = "/Users/apogorelskiy/.local/share/nvim/site/pack/packer/start/neotest-go",
     url = "https://github.com/nvim-neotest/neotest-go"
   },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/Users/apogorelskiy/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/apogorelskiy/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -213,6 +218,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/apogorelskiy/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vscode.nvim"] = {
+    loaded = true,
+    path = "/Users/apogorelskiy/.local/share/nvim/site/pack/packer/start/vscode.nvim",
+    url = "https://github.com/Mofiqul/vscode.nvim"
   }
 }
 
