@@ -1,7 +1,12 @@
-local status, theme = pcall(require, 'onedarkpro')
-if (not status) then return end
+vim.g.material_style = "oceanic"
+vim.cmd 'colorscheme material'
 
-vim.cmd [[ colorscheme vscode ]]
+require('material').setup({
+    -- ... other settings
+    disable = {
+        background = true,
+    },
+})
 
 local iconStatus, treeIcons = pcall(require, 'nvim-web-devicons')
 if (not iconStatus) then return end

@@ -1,22 +1,5 @@
 vim.cmd('autocmd!')
 
--- vim.wo.number = true
-
---vim.opt.autoindent = true
---vim.opt.showcmd = true
---vim.opt.laststatus = 2
---vim.opt.smarttab = true
---vim.opt.shiftwidth = 4
---vim.opt.tabstop = 4
---vim.opt.expandtab=true
---vim.opt.wrap = false
---vim.opt.list = false
---vim.opt.swapfile = false
---vim.opt.autoindent = true
---vim.opt.smartindent = true
---vim.opt.listchars = "eol:↲,tab:» ,trail:·,extends:<,precedes:>,conceal:┊,nbsp:␣"
---]]--
-
 local options = {
     tabstop = 4,
     shiftwidth = 4,
@@ -54,7 +37,6 @@ end
 
 vim.cmd([[
 	lan en_US.UTF-8
-	set termguicolors
 	hi DiagnosticError guifg=Red
 	hi DiagnosticWarn  guifg=DarkOrange
 	hi DiagnosticInfo  guifg=Blue

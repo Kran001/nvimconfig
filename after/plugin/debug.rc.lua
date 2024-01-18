@@ -5,13 +5,6 @@ local gdap = require("dap-go")
 
 gdap.setup()
 dapui.setup({})
--- vtdap.setup({})
-
--- dap.adapters.go = {
---   type = 'executable';
---   command = 'node';
---   args = { "--no-deprecation", os.getenv('HOME') .. '/tmp/vscode-go/dist/debugAdapter.js'};
--- }
 
 dap.adapters.delve = {
   type = 'server',
@@ -22,12 +15,10 @@ dap.adapters.delve = {
   }
 }
 
-
 local scratchCfg = {
   type = "delve",
   name = "Scratch no args",
   request = "launch",
---  program = "${file}",
   program = "./${relativeFileDirname}",
   showLog = true,
   dlvToolPath = vim.fn.exepath('dlv'),  -- Adjust to where delve is installed
@@ -67,3 +58,13 @@ k("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint c
 k("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
 k("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>")
 k("n", "<leader>dt", ":lua require'dap-go'.debug_test()<CR>")
+
+local namespace = vim.api.nvim_create_namespace("dap-hlng")
+vim.api.nvim_set_hl(namespace, 'DapBreakpoint', { fg='#eaeaeb', bg='#ffffff' })
+vim.api.nvim_set_hl(namespace, 'DapLogPoint', { fg='#eaeaeb', bg='#ffffff' })
+vim.api.nvim_set_hl(namespace, 'DapStopped', { fg='#eaeaeb', bg='#ffffff' })
+vim.fn.sign_define('DapBreakpoint', { text='◉ ', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointCondition', { text='ﳁ', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
+vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
+vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })

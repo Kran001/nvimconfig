@@ -3,7 +3,6 @@ if (not status) then return end
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.termguicolors = true
 
 local api = require('nvim-tree.api')
 

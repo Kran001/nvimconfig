@@ -17,7 +17,9 @@ return packer.startup(function(use)
 	} 
   }
   --themes
+  use 'marko-cerovac/material.nvim'
   use 'olimorris/onedarkpro.nvim'
+  use 'navarasu/onedark.nvim'
 
   -- набор Lua функций, используется как зависимость в большинстве
   -- плагинов, где есть работа с асинхронщиной
