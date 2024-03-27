@@ -48,7 +48,10 @@ return packer.startup(function(use)
   use('ray-x/guihua.lua')
   use("mfussenegger/nvim-dap")
   use("leoluz/nvim-dap-go")
-  use("rcarriga/nvim-dap-ui")
+  use({
+    "rcarriga/nvim-dap-ui",
+	requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+  })
   use("nvim-neotest/neotest")
   use("nvim-neotest/neotest-go")
 
@@ -85,8 +88,11 @@ return packer.startup(function(use)
     },
   })
 
-  use({"windwp/nvim-autopairs"})
+  use({
+    "lewis6991/gitsigns.nvim"
+  })
 
+  use({"windwp/nvim-autopairs"})
 
   use {
     'nvim-lualine/lualine.nvim',

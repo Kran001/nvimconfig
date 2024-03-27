@@ -6,7 +6,7 @@ bl.setup{
     mode = "tabs",
 	diagnostics = "nvim_lsp",
     always_show_bufferline = true,
-    show_buffer_close_icons = tre,
+    show_buffer_close_icons = true,
     show_close_icon = false,
     color_icons = true,
   },

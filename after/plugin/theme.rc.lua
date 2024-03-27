@@ -2,10 +2,10 @@ vim.g.material_style = "oceanic"
 vim.cmd 'colorscheme material'
 
 require('material').setup({
-    -- ... other settings
-    disable = {
-        background = true,
-    },
+  -- ... other settings
+  disable = {
+    background = true,
+  },
 })
 
 local iconStatus, treeIcons = pcall(require, 'nvim-web-devicons')
