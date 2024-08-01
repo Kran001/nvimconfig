@@ -46,7 +46,6 @@ map('n', '<leader>D', vim.lsp.buf.type_definition, {})
 map('n', '<leader><C-r>', vim.lsp.buf.rename, {})
 map('n', '<leader>ca', vim.lsp.buf.code_action, {})
 map('n', 'gr', vim.lsp.buf.references, {})
---map('n', '<leader>f', vim.lsp.buf.formatting, {})
 
 -- Languages settings 
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-install
@@ -81,7 +80,9 @@ if goStatus then
     tag_options = 'json=omitempty',
     icons = false,
   })
+
   map('n', '<Space>8', "<cmd>GoPkgOutline<CR>", {})
+
   local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
   vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.go",
@@ -111,10 +112,6 @@ lspconfig.lua_ls.setup {
       telemetry = {
         enable = false,
       },
-    --  format = {
-    --    indent_style = "space",
-    --    indent_size = 2,
-    --},
 	},
   },
 }

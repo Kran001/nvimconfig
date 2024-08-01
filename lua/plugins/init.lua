@@ -9,35 +9,27 @@ end
 local packer = require('packer')
 return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
+  use "petertriho/nvim-scrollbar"
 
   use {
   	'nvim-tree/nvim-tree.lua',
 	requires = {
 	  'nvim-tree/nvim-web-devicons',
-	} 
+	}
   }
-  --themes
-  use 'marko-cerovac/material.nvim'
-  use 'olimorris/onedarkpro.nvim'
-  use 'navarasu/onedark.nvim'
 
-  -- набор Lua функций, используется как зависимость в большинстве
-  -- плагинов, где есть работа с асинхронщиной
+  use 'marko-cerovac/material.nvim'
   use 'nvim-lua/plenary.nvim'
 
-   -- зависимости для движка автодополнения
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
 
-  -- движок автодополнения для LSP
   use 'hrsh7th/nvim-cmp'
   use 'saadparwaiz1/cmp_luasnip'
   use({
 	"L3MON4D3/LuaSnip",
-	-- follow latest release.
 	tag = "v<CurrentMajor>.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	-- install jsregexp (optional!:).
 	run = "make install_jsregexp"
   })
   -- набор готовых сниппетов для всех языков, включая go
@@ -55,11 +47,7 @@ return packer.startup(function(use)
   use("nvim-neotest/neotest")
   use("nvim-neotest/neotest-go")
 
-  -- конфиги для LSP серверов, нужен для простой настройки и
-  -- возможности добавления новых серверов
   use 'neovim/nvim-lspconfig'
-  -- парсер для всех языков программирования, цветной код как в твоем
-  -- любимом IDE
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -72,14 +60,12 @@ return packer.startup(function(use)
 
   use 'nvim-telescope/telescope-file-browser.nvim'
   use {
-    'akinsho/bufferline.nvim', 
-    tag = "*", 
+    'akinsho/bufferline.nvim',
+    tag = "*",
     requires = 'nvim-tree/nvim-web-devicons',
   }
 
-  -- иконки в выпадающем списке автодополнений (прямо как в vscode)
   use('onsails/lspkind-nvim')
-
   use({
     "kdheepak/lazygit.nvim",
     -- optional for floating window border decoration

@@ -12,5 +12,5 @@ bl.setup{
   },
 }
 
-vim.api.nvim_set_keymap('n', '<M><Tab>', '<cmd>BufferLineCycleNext<CR>', {})
-vim.api.nvim_set_keymap('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', {})
+vim.api.nvim_set_keymap('n', '<tab>', '<cmd>BufferLineCycleNext<CR>', {})
+vim.api.nvim_set_keymap('n', '<s-tab>', '<cmd>BufferLineCyclePrev<CR>', {})

@@ -11,10 +11,10 @@ treesitter.setup{
   -- установка phpdoc падает на m1
   ignore_install = { 'phpdoc' },
   -- включить подсветку
-  highlight = { 
-      enable = true,
-      disable = {},
-      additiional_vim_regex_highlighting = true,
+  highlight = {
+    enable = true,
+    disable = {},
+    additiional_vim_regex_highlighting = true,
   },
   indent = {
     enable = true,
