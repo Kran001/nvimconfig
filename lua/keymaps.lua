@@ -16,3 +16,5 @@ keymap.set('n', 'sv', ':vsplit<Return><C-w>w', { silent = true })
 -- resize window
 keymap.set('n', '<C-w><left>', '<C-w><')
 keymap.set('n', '<C-w><right>', '<C-w>>')
+
+keymap.set('n', '<tab>', '<C-i>zz', { silent = true, noremap = true })

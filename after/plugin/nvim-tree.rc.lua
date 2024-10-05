@@ -31,5 +31,5 @@ tree.setup({
   }
 })
 
-keymap.set('n', '<leader>t', api.tree.toggle, { silent = true }, {focus=true})
-keymap.set('n', '?', api.tree.toggle_help, { silent = true }, {focus=true})
+keymap.set('n', '<leader>t', api.tree.toggle, { silent = true })
+keymap.set('n', '?', api.tree.toggle_help, { silent = true})

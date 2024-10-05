@@ -12,10 +12,10 @@ return packer.startup(function(use)
   use "petertriho/nvim-scrollbar"
 
   use {
-  	'nvim-tree/nvim-tree.lua',
-	requires = {
-	  'nvim-tree/nvim-web-devicons',
-	}
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+    }
   }
 
   use 'marko-cerovac/material.nvim'
@@ -28,9 +28,9 @@ return packer.startup(function(use)
   use 'hrsh7th/nvim-cmp'
   use 'saadparwaiz1/cmp_luasnip'
   use({
-	"L3MON4D3/LuaSnip",
-	tag = "v<CurrentMajor>.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	run = "make install_jsregexp"
+    "L3MON4D3/LuaSnip",
+    tag = "v<CurrentMajor>.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    run = "make install_jsregexp"
   })
   -- набор готовых сниппетов для всех языков, включая go
   use 'rafamadriz/friendly-snippets'
@@ -70,7 +70,7 @@ return packer.startup(function(use)
     "kdheepak/lazygit.nvim",
     -- optional for floating window border decoration
     requires = {
-        "nvim-lua/plenary.nvim",
+      "nvim-lua/plenary.nvim",
     },
   })
 

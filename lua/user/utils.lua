@@ -2,7 +2,6 @@ local utils = {}
 
 function utils.get_current_paragraph()
   local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-  
   -- search forward
   local rowi = row
   while true do

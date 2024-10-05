@@ -15,16 +15,12 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
 end
 
-vim.cmd [[
-  set completeopt=menuone,noinsert,noselect
-  highlight! default link CmpItemKind CmpItemMenuDefault
-]]
+-- удалить ошибки диагностики в левом столбце (SignColumn)
+--vim.diagnostic.config({signs=false})
+--
 
 local map = vim.keymap.set
 local opts = { noremap=true, silent=true }
-
--- удалить ошибки диагностики в левом столбце (SignColumn)
---vim.diagnostic.config({signs=false})
 -- стандартные горячие клавиши для работы с диагностикой
 map('n', '<leader>e', vim.diagnostic.open_float, opts)
 map('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -49,26 +45,27 @@ map('n', 'gr', vim.lsp.buf.references, {})
 
 -- Languages settings 
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-install
-lspconfig.gopls.setup({
-  capabilities = capabilities,
-  cmd = { 'gopls', 'serve' },
-  filetypes = { 'go', 'go.mod' },
-  root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-        shadow = true
-      },
-      staticcheck = true,
-    }
-  },
-  single_file_support = true,
-})
-
 local goStatus, go = pcall(require, 'go')
 if goStatus then
   local goFmt = require('go.format')
+  lspconfig.gopls.setup({
+    capabilities = capabilities,
+    cmd = { 'gopls', 'serve' },
+    event = { "BufReadPre", "BufNewFile" },
+    filetypes = { 'go', 'go.mod' },
+    root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+          shadow = true
+        },
+        staticcheck = true,
+      }
+    },
+    single_file_support = true,
+  })
+
   go.setup({
     lsp_keymaps = false,
     go='go', -- go command, can be go[default] or go1.18beta1
@@ -81,7 +78,12 @@ if goStatus then
     icons = false,
   })
 
-  map('n', '<Space>8', "<cmd>GoPkgOutline<CR>", {})
+  vim.api.nvim_create_autocmd('BufReadPre', {
+    pattern= '*.go',
+    callback= function()
+      map('n', '<Space>8', "<cmd>GoPkgOutline<CR>", {silent=true})
+  	end,
+  })
 
   local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
   vim.api.nvim_create_autocmd("BufWritePre", {
@@ -94,6 +96,8 @@ if goStatus then
 end
 
 lspconfig.lua_ls.setup {
+  event = { "BufReadPre", "BufNewFile" },
+  filetypes = {"lua"},
   settings = {
     Lua = {
       runtime = {
@@ -117,11 +121,9 @@ lspconfig.lua_ls.setup {
 }
 
 lspconfig.jsonnet_ls.setup {
+  event = { "BufReadPre", "BufNewFile" },
   settings = {
-    ext_vars = {
-      foo = 'bar',
-  	},
-  	formatting = {
+ 	formatting = {
       -- default values
       Indent              = 2,
       MaxBlankLines       = 2,
@@ -139,5 +141,7 @@ lspconfig.jsonnet_ls.setup {
   },
 }
 
-lspconfig.pyright.setup{}
+lspconfig.pyright.setup{
+  event = { "BufReadPre", "BufNewFile" },
+}
 
