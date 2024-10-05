@@ -2,13 +2,38 @@ local status, treesitter = pcall(require, 'nvim-treesitter.configs')
 if (not status) then return end
 
 -- ~/.config/nvim/lua/plugins/treesitter.lua
-treesitter.setup{
-  -- список парсеров, список доступных парсеров можно посмотреть в документации
-  -- либо устаналивать все, чтобы подсветка синтаксиса работала везде корректно
+treesitter.setup({
   -- https://github.com/nvim-treesitter/nvim-treesitter
-  ensure_installed = 'all',
+  auto_install = true,
   sync_install = false,
-  -- установка phpdoc падает на m1
+  ensure_installed = {
+    "bash",
+    "cpp",
+    "gitignore",
+    "http",
+    "json",
+    "javascript",
+    "typescript",
+    "css",
+    "html",
+    "markdown",
+    "markdown_inline",
+    "proto",
+    "sql",
+    "yaml",
+    "go",
+    "c",
+    "lua",
+    "vim",
+    "query",
+    "vimdoc",
+    "graphql",
+	"make",
+    "cmake",
+    "rust",
+    "v"
+  },
+   
   ignore_install = { 'phpdoc' },
   -- включить подсветку
   highlight = {
@@ -19,5 +44,5 @@ treesitter.setup{
   indent = {
     enable = true,
   },
-}
+})
 

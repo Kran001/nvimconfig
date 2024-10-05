@@ -1,12 +1,35 @@
 local status, lspconfig = pcall(require, 'lspconfig')
 if (not status) then return end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
-  'force',
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+lspconfig.util.default_config.lsp_capabilities = vim.tbl_deep_extend( 'force',
   lspconfig.util.default_config,
-  capabilities
+  lsp_capabilities
 )
+
+local map = vim.keymap.set
+
+local lsp_attach = function (client, bufnr)
+  if client.server_capabilities.inlayHintProvider then
+	vim.lsp.inlay_hint.enable(true, {
+	bufnr = bufnr,
+  })
+  end
+
+  map('n', 'gd', vim.lsp.buf.definition, {})
+  map('n', 'K', vim.lsp.buf.hover, {})
+  map('n', 'gi', vim.lsp.buf.implementation, {})
+  map('n', '<C-k>', vim.lsp.buf.signature_help, {})
+  map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, {})
+  map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, {})
+  map('n', '<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, {})
+  map('n', '<leader>D', vim.lsp.buf.type_definition, {})
+  map('n', '<leader><C-r>', vim.lsp.buf.rename, {})
+  map('n', '<leader>ca', vim.lsp.buf.code_action, {})
+  map('n', 'gr', vim.lsp.buf.references, {})
+end
 
 local util = require('lspconfig/util')
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -15,33 +38,12 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
 end
 
--- удалить ошибки диагностики в левом столбце (SignColumn)
---vim.diagnostic.config({signs=false})
---
 
-local map = vim.keymap.set
 local opts = { noremap=true, silent=true }
--- стандартные горячие клавиши для работы с диагностикой
 map('n', '<leader>e', vim.diagnostic.open_float, opts)
 map('n', '[d', vim.diagnostic.goto_prev, opts)
 map('n', ']d', vim.diagnostic.goto_next, opts)
 map('n', '<leader>q', vim.diagnostic.setloclist, opts)
-
--- стандартные горячие клавиши для LSP, больше в документации
--- https://github.com/neovim/nvim-lspconfig map('n', 'gD', vim.lsp.buf.declaration, bufopts)
-map('n', 'gd', vim.lsp.buf.definition, {})
-map('n', 'K', vim.lsp.buf.hover, {})
-map('n', 'gi', vim.lsp.buf.implementation, {})
-map('n', '<C-k>', vim.lsp.buf.signature_help, {})
-map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, {})
-map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, {})
-map('n', '<leader>wl', function()
-  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-end, {})
-map('n', '<leader>D', vim.lsp.buf.type_definition, {})
-map('n', '<leader><C-r>', vim.lsp.buf.rename, {})
-map('n', '<leader>ca', vim.lsp.buf.code_action, {})
-map('n', 'gr', vim.lsp.buf.references, {})
 
 -- Languages settings 
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-install
@@ -49,7 +51,8 @@ local goStatus, go = pcall(require, 'go')
 if goStatus then
   local goFmt = require('go.format')
   lspconfig.gopls.setup({
-    capabilities = capabilities,
+    capabilities = lsp_capabilities,
+	on_attach = lsp_attach,
     cmd = { 'gopls', 'serve' },
     event = { "BufReadPre", "BufNewFile" },
     filetypes = { 'go', 'go.mod' },
@@ -60,6 +63,15 @@ if goStatus then
           unusedparams = true,
           shadow = true
         },
+		hints = {
+           assignVariableTypes = false,
+           compositeLiteralFields = false,
+           compositeLiteralTypes = true,
+           constantValues = true,
+           functionTypeParameters = false,
+           parameterNames = false,
+           rangeVariableTypes = true,
+        },
         staticcheck = true,
       }
     },
@@ -67,6 +79,7 @@ if goStatus then
   })
 
   go.setup({
+	capabilities = lsp_capabilities,
     lsp_keymaps = false,
     go='go', -- go command, can be go[default] or go1.18beta1
     goimports='gopls', -- goimport command, can be gopls[default] or goimport
@@ -98,6 +111,8 @@ end
 lspconfig.lua_ls.setup {
   event = { "BufReadPre", "BufNewFile" },
   filetypes = {"lua"},
+  on_attach = lsp_attach,
+  capabilities = lsp_capabilities,
   settings = {
     Lua = {
       runtime = {
@@ -122,6 +137,8 @@ lspconfig.lua_ls.setup {
 
 lspconfig.jsonnet_ls.setup {
   event = { "BufReadPre", "BufNewFile" },
+  capabilities = lsp_capabilities,
+  on_attach = lsp_attach,
   settings = {
     formatting = {
       -- default values
@@ -145,3 +162,11 @@ lspconfig.pyright.setup{
   event = { "BufReadPre", "BufNewFile" },
 }
 
+lspconfig.clangd.setup({
+  cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose', '--query-driver=/usr/bin/clang++'},
+  capabilities = lsp_capabilities,
+  on_attach = lsp_attach,
+  init_options = {
+    fallbackFlags = { '-std=c++17' },
+  },
+})

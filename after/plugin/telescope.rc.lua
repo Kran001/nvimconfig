@@ -16,6 +16,7 @@ telescope.setup {
   pickers = {
     find_files = {
       hidden = true,
+      file_ignore_patterns = { ".git/", "vendor", "bin", "go.sum" },
     },
     buffers = {
       -- начинать в normal моде при открытии списка буферов

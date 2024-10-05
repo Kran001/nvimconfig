@@ -25,8 +25,12 @@ tree.setup({
   git = {
     enable = true,
   },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+  },
   filters = {
-	git_ignored = true,
+    git_ignored = true,
     dotfiles = true,
   }
 })
