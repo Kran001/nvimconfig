@@ -37,7 +37,6 @@ cmp.setup({
     end, {'i', 's'}),
     ['<C-y>'] = cmp.mapping.confirm({ select = false }),
     ['<C-Space>'] = cmp.mapping.confirm({ select = false }),
---    ['<C-y>'] = cmp.mapping.complete(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
     ['<C-p>'] = cmp.mapping.select_next_item(select_opts),

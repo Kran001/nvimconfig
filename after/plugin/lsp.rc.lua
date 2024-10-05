@@ -123,7 +123,7 @@ lspconfig.lua_ls.setup {
 lspconfig.jsonnet_ls.setup {
   event = { "BufReadPre", "BufNewFile" },
   settings = {
- 	formatting = {
+    formatting = {
       -- default values
       Indent              = 2,
       MaxBlankLines       = 2,
