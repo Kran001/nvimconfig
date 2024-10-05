@@ -1,6 +1,7 @@
 local status, bl = pcall(require, 'bufferline')
 if (not status) then return end
 
+local map = vim.keymap.set
 bl.setup{
   options = {
     mode = "tabs",
@@ -12,5 +13,5 @@ bl.setup{
   },
 }
 
-vim.api.nvim_set_keymap('n', '<C-l>', '<cmd>BufferLineCycleNext<CR>', {silent=true})
-vim.api.nvim_set_keymap('n', '<C-h>', '<cmd>BufferLineCyclePrev<CR>', {silent=true})
+map('n', '<C-l>', '<cmd>BufferLineCycleNext<CR>', {silent=true})
+map('n', '<C-h>', '<cmd>BufferLineCyclePrev<CR>', {silent=true})

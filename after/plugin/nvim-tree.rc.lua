@@ -6,7 +6,7 @@ vim.g.loaded_netrwPlugin = 1
 
 local api = require('nvim-tree.api')
 
-local keymap = vim.keymap
+local map = vim.keymap.set
 
 local function my_on_attach(bufnr)
   -- default mappings
@@ -31,5 +31,5 @@ tree.setup({
   }
 })
 
-keymap.set('n', '<leader>t', api.tree.toggle, { silent = true })
-keymap.set('n', '?', api.tree.toggle_help, { silent = true})
+map('n', '<leader>t', api.tree.toggle, { silent = true })
+map('n', '?', api.tree.toggle_help, { silent = true})
