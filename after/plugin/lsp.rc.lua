@@ -163,10 +163,21 @@ lspconfig.pyright.setup{
 }
 
 lspconfig.clangd.setup({
-  cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose', '--query-driver=/usr/bin/clang++'},
+  cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose', '--query-driver=/usr/bin/g++'},
   capabilities = lsp_capabilities,
   on_attach = lsp_attach,
+  filetypes = { "h", "c", "cpp", "cc", "objc", "objcpp"},
   init_options = {
     fallbackFlags = { '-std=c++17' },
   },
+  single_file_support = true,
+  root_dir = lspconfig.util.root_pattern(
+    '.clangd',
+    '.clang-tidy',
+    '.clang-format',
+    'compile_commands.json',
+    'compile_flags.txt',
+    'configure.ac',
+    '.git'
+  )
 })
