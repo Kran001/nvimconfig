@@ -8,6 +8,8 @@ telescope.setup {
     hidden = true,
     mappings = {
       n = {
+        ['C-o'] = actions.move_selection_next,
+        ['C-p'] = actions.move_selection_previous,
         ['q'] = actions.close
       }
     }
@@ -16,6 +18,12 @@ telescope.setup {
   pickers = {
     find_files = {
       hidden = true,
+      file_ignore_patterns = { ".git/", "vendor", "bin", "go.sum" },
+    },
+    live_grep = {
+      additional_args = function()
+        return {"--hidden"}
+      end,
       file_ignore_patterns = { ".git/", "vendor", "bin", "go.sum" },
     },
     buffers = {
