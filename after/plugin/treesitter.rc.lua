@@ -16,6 +16,7 @@ treesitter.setup({
     "typescript",
     "css",
     "html",
+    "comment",
     "markdown",
     "markdown_inline",
     "proto",

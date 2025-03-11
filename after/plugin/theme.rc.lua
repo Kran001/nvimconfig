@@ -1,11 +1,3 @@
-
-require('material').setup({
-  -- ... other settings
-  disable = {
-		---    background = true,
-  },
-})
-
 local iconStatus, treeIcons = pcall(require, 'nvim-web-devicons')
 if (not iconStatus) then return end
 
@@ -22,6 +14,5 @@ treeIcons.setup {
   strict = true,
 }
 
-
-vim.g.material_style = "oceanic"
-vim.cmd 'colorscheme material'
+require('kanagawa').setup({})
+vim.cmd("colorscheme kanagawa")

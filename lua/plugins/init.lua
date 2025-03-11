@@ -52,7 +52,12 @@ return packer.startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
   }
-  use("Mofiqul/vscode.nvim")
+  --use({
+  -- 'rest-nvim/rest.nvim',
+  --  requires = { 'nvim-treesitter/nvim-treesitter', 'j-hui/fidget.nvim' },
+  --  rocks = {"mimetypes", "xml2lua"},
+  --})
+  use 'rebelot/kanagawa.nvim'
 
   use {
     'nvim-telescope/telescope.nvim',
